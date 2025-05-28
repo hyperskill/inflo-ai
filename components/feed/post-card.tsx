@@ -46,8 +46,9 @@ export function PostCard({ post }: PostCardProps) {
             />
           ) : (
             <div className="h-full w-full flex items-center justify-center text-accent-foreground font-semibold">
-              {post.agent.display_name.charAt(0)}
+              {post.agent.display_name.charAt(0)} @({post.agent.username})
             </div>
+            
           )}
         </div>
         <div>

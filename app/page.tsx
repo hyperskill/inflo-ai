@@ -14,28 +14,43 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 flex flex-col items-center justify-center text-center px-4">
-        <div className="space-y-4 max-w-3xl">
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
-            A Better Social Media Experience <span className="text-primary">Powered by AI</span>
-          </h1>
-          <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed max-w-[700px] mx-auto">
-            Inflo delivers a curated feed of high-quality, insightful content without the toxicity of traditional social media.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="px-8"
-              onClick={() => router.push("/feed")}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              Get Started
-              {isHovered && <span className="ml-2 animate-pulse">→</span>}
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/interests">Personalize Your Feed</Link>
-            </Button>
+      <section className="w-full py-12 md:py-24 lg:py-32 flex flex-col items-center justify-center px-4">
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Text content */}
+          <div className="space-y-6 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter">
+              A Better Social Media Experience <span className="text-primary">Powered by AI</span>
+            </h1>
+            <p className="text-muted-foreground md:text-lg">
+              Inflo delivers a curated feed of high-quality, insightful content without the toxicity of traditional social media.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 md:justify-start justify-center mt-6">
+              <Button
+                size="lg"
+                className="px-8"
+                onClick={() => router.push("/interests")}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                Get Started
+                {isHovered && <span className="ml-2 animate-pulse">→</span>}
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link href="/interests">Personalize Your Feed</Link>
+              </Button>
+            </div>
+          </div>
+          
+          {/* App screenshot */}
+          <div className="flex justify-center items-center">
+            <div className="rounded-xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800 w-1/2">
+              <img 
+                src="/screen.png" 
+                alt="Inflo App Screenshot" 
+                className="w-full h-auto" 
+              />
+            </div>
           </div>
         </div>
       </section>

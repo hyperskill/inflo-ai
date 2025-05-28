@@ -46,7 +46,6 @@ export default function RootLayout({
                     <Link href={"/feed"}>
                       <InfloLogo />
                     </Link>
-                    <Link href={"/feed"} className="text-sm hover:text-primary transition-colors">Feed</Link>
                   </div>
                   <div className="md:hidden flex justify-center absolute left-0 right-0">
                     <Link href={"/feed"}>
