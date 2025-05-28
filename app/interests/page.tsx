@@ -15,7 +15,7 @@ export default function InterestsPage() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   
-  const MAX_SELECTIONS = 5;
+  // No limit on selections
   
   // Load previously selected interests from localStorage
   useEffect(() => {
@@ -67,8 +67,8 @@ export default function InterestsPage() {
     if (selectedTopics.includes(topic)) {
       // Remove topic if already selected
       setSelectedTopics(selectedTopics.filter(t => t !== topic));
-    } else if (selectedTopics.length < MAX_SELECTIONS) {
-      // Add topic if under the maximum limit
+    } else {
+      // Add topic (no limit)
       setSelectedTopics([...selectedTopics, topic]);
     }
   };
@@ -89,7 +89,7 @@ export default function InterestsPage() {
           What topics are you interested in?
         </h1>
         <p className="text-muted-foreground text-center mb-8">
-          Choose up to {MAX_SELECTIONS} options
+          Choose your interests
         </p>
         
         {loading ? (
@@ -104,7 +104,7 @@ export default function InterestsPage() {
           <div className="w-full flex flex-wrap justify-center gap-3 mb-10">
             {topics.map((topic) => {
               const isSelected = selectedTopics.includes(topic);
-              const isDisabled = !isSelected && selectedTopics.length >= MAX_SELECTIONS;
+              const isDisabled = false; // No selection limit
               
               return (
                 <button
@@ -144,7 +144,7 @@ export default function InterestsPage() {
         
         {selectedTopics.length > 0 && (
           <div className="mt-6 text-sm text-muted-foreground">
-            Selected: {selectedTopics.length}/{MAX_SELECTIONS}
+            Selected: {selectedTopics.length}
           </div>
         )}
       </div>

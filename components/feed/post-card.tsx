@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Post, ReactionType } from "@/types/feed";
 import { formatDistanceToNow, formatExactDateTime } from "@/utils/date-formatter";
-import { ThumbsUp, ThumbsDown, MessageSquare } from "lucide-react";
+import { Heart, MessageSquare } from "lucide-react";
 import { CommentsList } from "./comments-list";
 import { VideoContent } from "./video-content";
 import { QuestionContent } from "./question-content";
@@ -15,39 +15,23 @@ interface PostCardProps {
 
 export function PostCard({ post }: PostCardProps) {
   const [showComments, setShowComments] = useState(false);
-  const [userReaction, setUserReaction] = useState<ReactionType | null>(null);
-  const [isReacting, setIsReacting] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(() => Math.floor(Math.random() * 100) + 5);
   
   // Determine post type
   const isVideoPost = !!post.video_url;
   const isQuestionPost = post.content.includes("?") && post.content.split(" ").length <= 15;
   
-  // Fetch user's reaction to this post on component mount
-  useEffect(() => {
-    const fetchUserReaction = async () => {
-      const reaction = await getUserReaction(post.id);
-      console.log('Fetched user reaction:', reaction, 'for post:', post.id);
-      setUserReaction(reaction);
-    };
-    
-    fetchUserReaction();
-  }, [post.id]);
+  // No need to fetch reactions from the server
   
   // Handle reaction toggle (like/dislike)
-  const handleReaction = async (reactionType: ReactionType) => {
-    if (isReacting) return;
-    
-    setIsReacting(true);
-    try {
-      console.log('Toggling reaction:', reactionType, 'for post:', post.id);
-      const newReaction = await toggleReaction(post.id, reactionType);
-      console.log('New reaction state:', newReaction);
-      setUserReaction(newReaction);
-    } catch (error) {
-      console.error("Error toggling reaction:", error);
-    } finally {
-      setIsReacting(false);
+  const handleLike = () => {
+    if (liked) {
+      setLikeCount(likeCount - 1);
+    } else {
+      setLikeCount(likeCount + 1);
     }
+    setLiked(!liked);
   };
   
   return (
@@ -106,27 +90,15 @@ export function PostCard({ post }: PostCardProps) {
       
       {/* Interaction buttons */}
       <div className="flex items-center gap-6 p-4 pt-2 border-t border-border mt-auto">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <button 
-            className={`flex items-center justify-center gap-1 text-sm transition-colors p-2 rounded-full
-              ${userReaction === 'like' 
-                ? 'bg-primary/10 text-primary' 
-                : 'text-muted-foreground hover:text-primary hover:bg-primary/5'}`}
-            onClick={() => handleReaction('like')}
-            disabled={isReacting}
+            className={`flex items-center justify-center transition-colors p-2 rounded-full
+              ${liked ? 'text-red-500' : 'text-muted-foreground hover:text-red-500'}`}
+            onClick={handleLike}
           >
-            <ThumbsUp size={18} />
+            <Heart size={18} fill={liked ? "currentColor" : "none"} />
           </button>
-          <button 
-            className={`flex items-center justify-center gap-1 text-sm transition-colors p-2 rounded-full
-              ${userReaction === 'dislike' 
-                ? 'bg-primary/10 text-primary' 
-                : 'text-muted-foreground hover:text-primary hover:bg-primary/5'}`}
-            onClick={() => handleReaction('dislike')}
-            disabled={isReacting}
-          >
-            <ThumbsDown size={18} />
-          </button>
+          <span className="text-sm">{likeCount}</span>
         </div>
         <button 
           className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors ml-auto"
