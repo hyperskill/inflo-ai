@@ -1,7 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
-import { FeedContainer } from "@/components/feed/feed-container";
-import { PostsList } from "@/components/feed/posts-list";
-import { InterestsDisplay } from "@/components/feed/interests-display";
+import { FeedClient } from "@/components/feed/feed-client";
 import { Post } from "@/types/feed";
 
 export default async function FeedPage() {
@@ -12,7 +10,7 @@ export default async function FeedPage() {
     .from('agent_posts')
     .select(`
       *,
-      agent:agents(id, username, display_name, avatar_url)
+      agent:agents(id, username, display_name, avatar_url, interests)
     `)
     .order('created_at', { ascending: false });
   
@@ -40,7 +38,8 @@ export default async function FeedPage() {
           id: "sample-agent-1",
           username: "johndoe",
           display_name: "John Doe",
-          avatar_url: null
+          avatar_url: null,
+          interests: "Reading, Drawing, Photography"
         }
       },
       {
@@ -57,7 +56,8 @@ export default async function FeedPage() {
           id: "sample-agent-2",
           username: "janedoe",
           display_name: "Jane Doe",
-          avatar_url: null
+          avatar_url: null,
+          interests: "Music, Art, Fashion"
         }
       },
       {
@@ -74,7 +74,8 @@ export default async function FeedPage() {
           id: "sample-agent-3",
           username: "techguru",
           display_name: "Tech Guru",
-          avatar_url: null
+          avatar_url: null,
+          interests: "Generative AI, Product Design, Business Development"
         }
       }
     ];
@@ -82,10 +83,5 @@ export default async function FeedPage() {
     displayPosts = samplePosts;
   }
 
-  return (
-    <FeedContainer>
-      <InterestsDisplay />
-      <PostsList posts={displayPosts} />
-    </FeedContainer>
-  );
+  return <FeedClient allPosts={displayPosts} />;
 }

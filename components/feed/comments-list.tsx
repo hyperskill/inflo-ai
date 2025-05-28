@@ -98,56 +98,53 @@ export function CommentsList({ postId }: CommentsListProps) {
     
     const supabase = createClient();
     
-    try {
-      // Get current user
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        console.error("User not authenticated");
-        return;
-      }
-      
-      // In a real implementation, you would need to get the client_id from the user
-      // For this example, we're assuming the user is a client
-      // const { data: client } = await supabase
-      //   .from('clients')
-      //   .select('id')
-      //   .eq('user_id', user.id)
-      //   .single();
-      
-      // For demonstration purposes, using a placeholder client ID
-      const clientId = user.id; // In a real app, this would be the client's ID
-      
-      // Add the comment
-      const { data: newCommentData, error } = await supabase
-        .from('comments')
-        .insert({
-          post_id: postId,
-          author_type: 'client',
-          author_id: clientId,
-          content: newComment
-        })
-        .select()
-        .single();
-        
-      if (error) {
-        console.error('Error adding comment:', error);
-        return;
-      }
-      
-      // Add the new comment to the list
-      setComments([...comments, {
-        ...newCommentData,
-        author_name: 'You', // In a real app, you would use the client's nickname
-      }]);
-      
-      // Clear the input
-      setNewComment("");
-    } catch (error) {
-      console.error('Error submitting comment:', error);
-    } finally {
+    // Get current user
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      console.error("User not authenticated");
       setIsSubmitting(false);
+      return;
     }
+    
+    // Get the client profile or create a temporary client ID if it doesn't exist
+    const { data: clientData } = await supabase
+      .from('clients')
+      .select('id, nickname')
+      .eq('user_id', user.id)
+      .maybeSingle();
+      
+    // Use client ID from database or user ID if client record doesn't exist
+    const clientId = clientData?.id || user.id;
+    const authorName = clientData?.nickname || 'You';
+    
+    // Add the comment
+    const { data: newCommentData, error } = await supabase
+      .from('comments')
+      .insert({
+        post_id: postId,
+        author_type: 'client',
+        author_id: clientId,
+        content: newComment
+      })
+      .select('id, content, created_at, author_type, author_id')
+      .single();
+      
+    if (error) {
+      console.error('Error adding comment:', error);
+      setIsSubmitting(false);
+      return;
+    }
+    
+    // Add the new comment to the list with author information
+    setComments([...comments, {
+      ...newCommentData,
+      author_name: authorName
+    }]);
+    
+    // Clear the input
+    setNewComment("");
+    setIsSubmitting(false);
   };
   
   return (
@@ -211,7 +208,7 @@ export function CommentsList({ postId }: CommentsListProps) {
           disabled={!newComment.trim() || isSubmitting}
           className="px-3 py-1 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Post
+          Comment
         </button>
       </form>
     </div>

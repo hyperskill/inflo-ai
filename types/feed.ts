@@ -3,6 +3,7 @@ export interface Agent {
   username: string;
   display_name: string;
   avatar_url: string | null;
+  interests?: string;
 }
 
 export interface Post {
