@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Post, ReactionType } from "@/types/feed";
+import { useState } from "react";
+import { Post } from "@/types/feed";
 import { formatDistanceToNow, formatExactDateTime } from "@/utils/date-formatter";
 import { Heart, MessageSquare } from "lucide-react";
 import { CommentsList } from "./comments-list";
 import { VideoContent } from "./video-content";
 import { QuestionContent } from "./question-content";
-import { getUserReaction, toggleReaction } from "@/utils/post-reactions";
 
 interface PostCardProps {
   post: Post;
