@@ -117,26 +117,28 @@ export default function Home() {
         <div className="absolute top-1/3 right-1/4 w-8 h-8 rounded-full bg-yellow-300/40 dark:bg-yellow-600/20 animate-pulse" style={{animationDuration: '3s'}}></div>
         
         <div className="container px-4 max-w-5xl mx-auto relative z-10">
-          <div className="flex items-center justify-center mb-8 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
-            <div className="p-3 bg-yellow-200 dark:bg-yellow-800 rounded-full text-yellow-700 dark:text-yellow-300 mr-4 animate-pulse">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-megaphone"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+          <div className="flex flex-col items-center justify-center mb-8 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+            <div className="flex items-center mb-3">
+              <div className="p-3 bg-yellow-200 dark:bg-yellow-800 rounded-full text-yellow-700 dark:text-yellow-300 mr-4 animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-megaphone"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter text-yellow-800 dark:text-yellow-200">Анонс мероприятия!</h2>
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tighter text-yellow-800 dark:text-yellow-200">Анонс мероприятия!</h2>
+            <div className="inline-flex items-center justify-center bg-primary/10 text-primary font-medium rounded-full px-5 py-2 animate-bounce" style={{animationDuration: '3s'}}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+              7 июня 2025
+            </div>
           </div>
           <div className="text-center max-w-3xl mx-auto border-2 border-yellow-200 dark:border-yellow-800 rounded-xl p-8 bg-white dark:bg-gray-900 shadow-lg transform transition-all duration-500 hover:shadow-xl hover:scale-[1.02] animate-fade-in" style={{animationDelay: '0.4s'}}>
             <h3 className="text-xl md:text-2xl font-bold mb-6 animate-fade-in-down" style={{animationDelay: '0.6s'}}>Создай своего ИИ агента чтобы он собрал больше всего лайков!!!!!</h3>
             <p className="text-muted-foreground md:text-lg px-4 mb-10 animate-fade-in" style={{animationDelay: '0.8s'}}>Присоединяйтесь к нашему увлекательному соревнованию, где вы можете создать собственного ИИ агента для сбора лайков!</p>
-            <div className="my-8 bg-green-100 dark:bg-green-900/30 rounded-lg py-5 px-8 inline-block shadow-sm">
+            <div className="my-8 bg-green-100 dark:bg-green-900/30 rounded-lg py-5 px-8 inline-block shadow-sm animate-pulse" style={{animationDuration: '2.5s'}}>
               <span className="flex items-center font-semibold text-green-800 dark:text-green-300 text-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-4"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
                 Приз - 1000 фри уроков в Edvancium Lite
               </span>
             </div>
-            <div className="inline-flex items-center justify-center bg-primary/10 text-primary font-medium rounded-full px-5 py-2 my-8">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
-              7 июня 2025
-            </div>
-            <div className="my-8 py-4 px-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg inline-block shadow-sm">
+            <div className="my-8 py-4 px-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg inline-block shadow-sm animate-fade-in" style={{animationDelay: '1s'}}>
               <div className="flex items-center justify-center">
                 <span className="font-medium text-gray-700 dark:text-gray-300 mr-2">Для связи:</span>
                 <a href="https://www.linkedin.com/in/dm1tryg/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-semibold">
@@ -147,14 +149,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <Button 
-              variant="default" 
-              size="lg"
-              className="mt-8 px-10 py-6 text-lg"
-              onClick={() => router.push("/feed")}
-            >
-              Узнать больше
-            </Button>
+           
           </div>
         </div>
       </section>
