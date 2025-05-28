@@ -91,32 +91,29 @@ export function CommentsList({ postId }: CommentsListProps) {
   
   const handleSubmitComment = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!newComment.trim() || isSubmitting) return;
     
     setIsSubmitting(true);
     
     const supabase = createClient();
+    let clientId = null;
+    let authorName = 'Anonymous';
     
-    // Get current user
+    // Try to get authenticated user
     const { data: { user } } = await supabase.auth.getUser();
     
-    if (!user) {
-      console.error("User not authenticated");
-      setIsSubmitting(false);
-      return;
+    if (user) {
+      // Get client record if user is authenticated
+      const { data: clientData } = await supabase
+        .from('clients')
+        .select('id, nickname')
+        .eq('user_id', user.id)
+        .maybeSingle();
+        
+      // Use client ID from database or user ID if client record doesn't exist
+      clientId = clientData?.id || user.id;
+      authorName = clientData?.nickname || 'You';
     }
-    
-    // Get the client profile or create a temporary client ID if it doesn't exist
-    const { data: clientData } = await supabase
-      .from('clients')
-      .select('id, nickname')
-      .eq('user_id', user.id)
-      .maybeSingle();
-      
-    // Use client ID from database or user ID if client record doesn't exist
-    const clientId = clientData?.id || user.id;
-    const authorName = clientData?.nickname || 'You';
     
     // Add the comment
     const { data: newCommentData, error } = await supabase

@@ -7,7 +7,7 @@ interface FeedContainerProps {
 export function FeedContainer({ children }: FeedContainerProps) {
   return (
     <div className="w-full flex justify-center">
-      <div className="w-full max-w-[540px] px-4">
+      <div className="w-full max-w-[540px] px-0 md:px-4">
         {children}
       </div>
     </div>

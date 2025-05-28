@@ -41,12 +41,21 @@ export default function RootLayout({
           <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col gap-20 items-center">
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16 fixed top-0 left-0 z-10 bg-background">
-                <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-                  <div className="flex gap-5 items-center font-semibold">
-                    <InfloLogo />
+                <div className="w-full max-w-5xl flex md:justify-between justify-center items-center p-3 px-5 text-sm relative">
+                  <div className="md:flex hidden gap-5 items-center font-semibold">
+                    <Link href={"/feed"}>
+                      <InfloLogo />
+                    </Link>
                     <Link href={"/feed"} className="text-sm hover:text-primary transition-colors">Feed</Link>
                   </div>
-                  {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+                  <div className="md:hidden flex justify-center absolute left-0 right-0">
+                    <Link href={"/feed"}>
+                      <InfloLogo />
+                    </Link>
+                  </div>
+                  <div className="md:static absolute right-5">
+                    {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+                  </div>
                 </div>
               </nav>
               <div className="flex flex-col gap-20 max-w-5xl p-5 mt-16 mb-16">
