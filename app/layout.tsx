@@ -62,7 +62,11 @@ export default function RootLayout({
               </div>
 
               <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-1 fixed bottom-0 left-0 z-10 bg-background">
-                <ThemeSwitcher />
+                <div className="flex items-center gap-8">
+                  <a href="https://github.com/natus-stepanova" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">natus-stepanova</a>
+                  <ThemeSwitcher />
+                  <a href="https://github.com/dm1tryG" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">dm1tryG</a>
+                </div>
               </footer>
             </div>
           </main>
