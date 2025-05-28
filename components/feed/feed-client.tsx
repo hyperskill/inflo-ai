@@ -44,7 +44,7 @@ export function FeedClient({ allPosts }: { allPosts: Post[] }) {
 
   return (
     <FeedContainer>
-      <InterestsDisplay />
+      {/* <InterestsDisplay /> */}
       <PostsList posts={filteredPosts} />
     </FeedContainer>
   );
