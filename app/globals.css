@@ -4,6 +4,10 @@
 
 @layer base {
   :root {
+    --font-family: 'Manrope', sans-serif;
+    --font-size-base: 1.05rem;
+    --line-height-base: 1.6;
+    
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -63,7 +67,30 @@
   * {
     @apply border-border;
   }
+  
+  html {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+  }
+  
   body {
     @apply bg-background text-foreground;
+  }
+  
+  h1 {
+    @apply text-3xl font-bold;
+  }
+  
+  h2 {
+    @apply text-2xl font-bold;
+  }
+  
+  h3 {
+    @apply text-xl font-bold;
+  }
+  
+  p {
+    @apply mb-4;
   }
 }
