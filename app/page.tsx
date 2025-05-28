@@ -44,7 +44,7 @@ export default function Home() {
           
           {/* App screenshot */}
           <div className="flex justify-center items-center">
-            <div className="rounded-xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800 w-1/2">
+            <div className="rounded-xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800 w-4/5">
               <img 
                 src="/screen.png" 
                 alt="Inflo App Screenshot" 
